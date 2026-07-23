@@ -339,7 +339,7 @@ Antes de cualquier tarea no trivial:
 | DT-4 | Diarización posiblemente cuello de botella | Tras DT-2 | Con la transcripción en GPU, pyannote en CPU puede dominar el tiempo. Reemplazo natural: `sherpa-onnx` (ONNX Runtime, más liviano) implementando `DiarizationEngine`. |
 | DT-5 | `scripts/backup.ps1` | Setup | No existe. Necesario para que el modo `backup:` funcione. |
 | DT-6 | Token HF expuesto | Cuando convenga | El `HF_TOKEN` se pegó en una conversación. Es de solo lectura, pero conviene regenerarlo en https://huggingface.co/settings/tokens. |
-| DT-7 | Sin control de versiones | Setup | El proyecto no es repo git. `git init` pendiente. |
+| ~~DT-7~~ | ~~Sin control de versiones~~ | ✅ Cerrada 2026-07-23 | Repo en https://github.com/jaguez40-star/audiotracker · rama `main` · commit inicial `a28f79d`. Identidad configurada solo a nivel de repo. |
 
 Cualquier `# TODO[DT-x]:` en código → entrada espejo en esta tabla. Al cerrar, eliminar de tabla + referenciar commit.
 
@@ -385,6 +385,7 @@ Cosas que costaron tiempo descubrir. Consultar antes de depurar lo mismo dos vec
 | 2026-07-23 | UX-2 | La insignia del frontend mostraba `small · cpu` con la GPU ya activa: la consulta de estado tenía `staleTime` alto sin refresco. Corregido con `refetchInterval`. | `App.tsx`, `api/client.ts` | — |
 | 2026-07-23 | DOC-1 | `CLAUDE.md` adaptado desde el proyecto `sellweb`: conservadas las secciones de método (§ 1, 6, 7, 8, 11, 13) y reemplazados stack, arquitectura y dominio. Añadidas § 4 (restricciones de entorno verificadas) y § 12 (trampas conocidas) para no repetir la investigación de esta sesión. | `CLAUDE.md` | — |
 | 2026-07-23 | DOC-2 | Estructura del proyecto verificada contra el disco y documentada al completo. Añadida § 3-bis con las funcionalidades operativas. `.gitignore` corregido: no cubría `vendor/`, `models/` ni `*.tsbuildinfo`, contradiciendo la regla 4 de § 11. | `CLAUDE.md`, `.gitignore` | — |
+| 2026-07-23 | GIT-1 | `git init` + commit inicial + publicación en GitHub (cierra DT-7). Auditoría previa al commit: verificado archivo por archivo que `.env`, `models/`, `vendor/`, `venv/` y `data/` quedan excluidos, y que el token no aparece en el contenido preparado. 50 archivos, 6.489 líneas. | todo el proyecto | `a28f79d` |
 
 ### Estado al cierre de la sesión
 
