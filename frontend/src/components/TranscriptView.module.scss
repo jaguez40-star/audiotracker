@@ -1,0 +1,138 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  min-width: 0;
+}
+
+.filename {
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.timing {
+  color: var(--text-faint);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.primaryAction {
+  border-color: transparent;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover {
+    background: var(--accent-hover);
+    border-color: transparent;
+    color: #fff;
+  }
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  max-height: 62vh;
+  overflow-y: auto;
+}
+
+.turn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 13px 14px;
+  border-radius: var(--radius);
+
+  &:hover {
+    background: var(--bg-inset);
+  }
+}
+
+.gutter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  width: 92px;
+  flex-shrink: 0;
+}
+
+.speaker {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--speaker-color);
+  white-space: nowrap;
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.text {
+  min-width: 0;
+  word-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+  .turn {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .gutter {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 9px;
+    width: auto;
+  }
+
+  .stats {
+    width: 100%;
+    margin-right: 0;
+  }
+}

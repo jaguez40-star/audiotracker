@@ -1,0 +1,27 @@
+# En Windows, `pip install torch` desde PyPI instala el build CPU. Es lo que
+# queremos: esta maquina tiene una AMD RDNA2 sin ruta ROCm/CUDA en Windows.
+# No agregar --index-url de CUDA: no hay GPU NVIDIA aqui.
+
+# --- API ---
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.32,<1.0
+pydantic>=2.9,<3.0
+pydantic-settings>=2.6,<3.0
+python-multipart>=0.0.12
+
+# --- Logging ---
+structlog>=24.4
+
+# --- Transcripcion ---
+faster-whisper>=1.1.0
+
+# --- Diarizacion ---
+# Arrastra torch, torchaudio, pytorch-lightning y speechbrain.
+# 4.x es obligatorio: pyannote 3.x usa torchaudio.AudioMetaData, eliminado en
+# torchaudio >= 2.11.
+pyannote.audio>=4.0,<5.0
+
+# --- Audio ---
+# libsndfile via soundfile: es la ruta de lectura que usamos para pyannote,
+# porque torchcodec (su backend por defecto) queda bloqueado por WDAC.
+soundfile>=0.12.1

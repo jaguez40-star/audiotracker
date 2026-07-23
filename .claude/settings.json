@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors | Format-List; \"--- RAM ---\"; [math]::Round\\(\\(Get-CimInstance Win32_ComputerSystem\\).TotalPhysicalMemory/1GB,1\\))",
+      "PowerShell(\"--- python ---\"; try { python --version } catch { \"python not on PATH\" }; \"--- ffmpeg ---\"; $f = Get-Command ffmpeg -ErrorAction SilentlyContinue; if \\($null -eq $f\\) { \"ffmpeg NOT FOUND\" } else { $f.Source }; \"--- ollama ---\"; $o = Get-Command ollama -ErrorAction SilentlyContinue; if \\($null -eq $o\\) { \"ollama NOT FOUND on PATH\" } else { $o.Source })",
+      "PowerShell(\"--- Vulkan runtime ---\"; if \\(Test-Path \"$env:SystemRoot\\\\System32\\\\vulkan-1.dll\"\\) { \"vulkan-1.dll present\" } else { \"vulkan-1.dll NOT found\" }; $vi = Get-Command vulkaninfo -ErrorAction SilentlyContinue; if \\($null -eq $vi\\) { \"vulkaninfo not on PATH\" } else { $vi.Source }; \"--- HIP SDK / ROCm ---\"; if \\(Test-Path 'C:\\\\Program Files\\\\AMD\\\\ROCm'\\) { Get-ChildItem 'C:\\\\Program Files\\\\AMD\\\\ROCm' | Select-Object -ExpandProperty Name } else { \"No ROCm/HIP SDK installed\" })",
+      "PowerShell(Get-CimInstance Win32_VideoController)",
+      "PowerShell(Get-PnpDevice -Class Display -ErrorAction SilentlyContinue)",
+      "PowerShell(\"--- all display adapters incl disabled ---\")",
+      "WebFetch(domain:rocm.docs.amd.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:opennmt.net)",
+      "WebFetch(domain:www.amd.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://api.github.com/repos/OpenNMT/CTranslate2/releases/latest\")",
+      "Bash(curl -s \"https://api.github.com/search/code?q=repo:OpenNMT/CTranslate2+gfx\" -H \"Accept: application/vnd.github+json\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/OpenNMT/CTranslate2/master/.github/workflows/ci.yml\")",
+      "Bash(curl -s \"https://api.github.com/repos/ChharithOeun/whisper-amd-windows\")",
+      "PowerShell(ollama --version)",
+      "PowerShell(ollama list)",
+      "PowerShell(\"--- ollama version ---\")",
+      "PowerShell(\"--- modelos instalados ---\")",
+      "PowerShell(\"--- contenido de .claude ---\"; Get-ChildItem 'c:\\\\APLICACIONES\\\\audio_track\\\\.claude' -Recurse -Force -ErrorAction SilentlyContinue | Select-Object FullName; \"--- pip ---\"; python -m pip --version; \"--- node/npm ---\"; try { \"node $\\(node --version\\)\" } catch { \"node NOT FOUND\" }; try { \"npm $\\(npm --version\\)\" } catch { \"npm NOT FOUND\" })",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_backend.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; $env:PYTHONWARNINGS='ignore'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_routes.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; $env:PYTHONWARNINGS='ignore'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_router.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; .\\\\venv\\\\Scripts\\\\python.exe -m pip install pytest httpx --quiet 2>&1 | Select-Object -Last 3; \"--- pytest instalado ---\"; $env:PYTHONWARNINGS='ignore'; .\\\\venv\\\\Scripts\\\\python.exe -m pytest -q 2>&1 | Select-Object -Last 25)",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONWARNINGS='ignore'; $sp='C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad'; Start-Process -FilePath \".\\\\venv\\\\Scripts\\\\python.exe\" -ArgumentList '-m','uvicorn','app.main:app','--host','127.0.0.1','--port','6024' -RedirectStandardError \"$sp\\\\api_err.log\" -RedirectStandardOutput \"$sp\\\\api_out.log\" -PassThru -WindowStyle Hidden | Select-Object -ExpandProperty Id | ForEach-Object { \"uvicorn PID $_\" }; Start-Sleep -Seconds 12; \"--- /api/health ---\"; try { \\(Invoke-WebRequest -Uri 'http://127.0.0.1:6024/api/health' -UseBasicParsing\\).Content } catch { \"FALLO: $_\" })",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_token.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_download.py' 2>&1 | Select-String -NotMatch 'it/s|B/s|%\\\\|')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_download.py' 2>&1 | Select-String -Pattern 'pyannote/|gated|DESCARGA|FALLO|Cannot access')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_e2e.py' 2>&1 | Select-String -NotMatch 'B/s|it/s|\\\\d+%\\\\|')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_community.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_output.py')",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\check_aac.py' 2>&1 | Select-String -NotMatch 'normalizando audio|audio normalizado')",
+      "PowerShell(try { $jobs = Invoke-RestMethod -Uri 'http://127.0.0.1:6024/api/jobs'; $jobs | Select-Object filename, status, duration_seconds, speaker_count, created_at | Format-List } catch { \"backend no responde: $_\" })",
+      "WebFetch(domain:pypi.org)",
+      "PowerShell(cd C:\\\\APLICACIONES\\\\audio_track\\\\backend; $env:PYTHONPATH='.'; .\\\\venv\\\\Scripts\\\\python.exe 'C:\\\\Users\\\\jague\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--APLICACIONES-audio-track\\\\4c7bf6aa-f267-4d79-ae9b-dc1ff3dfc722\\\\scratchpad\\\\gen_bench_audio.py')"
+    ]
+  }
+}

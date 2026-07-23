@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+.env
+.pytest_cache/
+
+# Datos generados (uploads y transcripts)
+backend/data/
+
+# Artefactos redescargables (~1 GB) — nunca versionar.
+# vendor/ : binario whisper.cpp + Vulkan de lemonade-sdk
+# models/ : modelos ggml de Whisper
+vendor/
+models/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Editores
+.vscode/
+.idea/
